@@ -44,7 +44,7 @@ member.getTeam();
 member.getOrder().getDelivery();
 ```
 - JPA는 동일한 트랜잭션에서 조회한 엔티티 같음을 보장해준다.
-``java
+```java
 String memberid = "100";
 Member member1 = jpa.find(Member.class, memberId);
 Member member2 = jpa.find(Member.class, memberId);
@@ -72,4 +72,3 @@ member1 == member2; // 같다
   String teamName = team.getName();
   ```
   > 위의 지연로딩과 즉시로딩은 옵션으로 활성화 / 비활성화가 가능하다. (튜닝이 간편)
-
