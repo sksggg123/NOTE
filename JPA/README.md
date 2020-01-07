@@ -6,5 +6,5 @@
 
 ### [JPA 환경설정](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_preferences.md)
 
-### [JPA 기본 CRUD](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_ex1_training)
+### [JPA 기본 CRUD](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_ex1_training.md)
 
