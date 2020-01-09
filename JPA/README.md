@@ -8,3 +8,5 @@
 
 ### [JPA 기본 CRUD](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_ex1_training.md)
 
+### [JPA 영속성 컨텍스트](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_persistence.md)
+
