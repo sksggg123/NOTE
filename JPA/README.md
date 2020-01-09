@@ -10,3 +10,4 @@
 
 ### [JPA 영속성 컨텍스트](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_persistence.md)
 
+### [JPA 엔티티 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_entity_mapping.md)
