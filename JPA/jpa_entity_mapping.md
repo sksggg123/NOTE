@@ -103,4 +103,168 @@ Lob어노테이션에는 지정할 수 있는 옵션이 없으며, String일 경
 
 ## 기본 키 매핑
 
+### @Id
 
+@Id 어노테이션만 사용할 경우 직접 해당 필드값을 기본키(PK)로 사용하는 것.
+
+```java
+@Entity
+public class Member {
+
+    @Id
+    private String id;
+
+    @Column(nullable = false, length = 10)
+    private String name;
+}
+
+// setId(""); 이 없기 때문에 수행이 되지 않는다.
+Member member = new Member();
+member.setName("KWON");
+em.persist(member);
+
+// 기본키은 id를 필수로 셋팅해주어야 한다.
+// 정상동작!
+Member member = new Member();
+member.setId("1");
+member.setName("KWON");
+em.persist(member)
+```
+
+### @GeneratedValue
+
+@GeneratedValue 어노테이션은 기본키를 자동할당 해준다. 추가적인 옵션으로는 아래 4가지가 있다.
+- IDENTITY : 데이터베이스에 위임.
+- SEQUENCE : 데이터베이스 시퀀스 오브젝트 사용
+- TABLE : 키 생성용 테이블 사용
+- AUTO : 방언에 따라 자동 지정, 기본값
+
+IDENTITY의 경우 기본키 생성을 데이터베이스에 위임한다.주로 MySQL, PostgreSQL, SQL Server, DB2에서 사용한다.  
+JPA는 보통 트랜잭션 커밋 시점에 Insert SQL이 실행 된다. 그렇기 때문에 AUTO INCREMENT는 데이터베이스에 Insert할때 생성이 되기때문에 영속성 컨텍스트에서는 값을 알 수가 없다.  
+그렇기때문에 IDENTITY는 예외적으로 persist할때 insert쿼리가 수행이 된다. 그 후에 내부적으로 select해서 값을 영속성 컨텍스트에 올린다. 아래 소스와 수행된 쿼리 절차를 확인해보자.  
+
+```java
+@Entity
+public class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private String id;
+
+    @Column(nullable = false, length = 10)
+    private String name;
+}
+
+Member member = new Member();
+member.setName("KWON");
+System.out.println("===========영속성 컨텍스트 수행 시작==========");
+em.persist(member);
+System.out.println("===========영속성 컨텍스트 수행 종료==========");
+
+tx.commit(); // 원래라면 이부분에 insert 쿼리가 수행되야 한다.
+
+/**
+  ===========영속성 컨텍스트 수행 시작==========
+Hibernate: 
+    /* insert hellojpa.Member
+        */ insert 
+        into
+            Member
+            (id, name) 
+        values
+            (null, ?)
+===========영속성 컨텍스트 수행 종료==========
+  */
+```
+
+SEQUENCE의 경우에는 유일한 값을 순서대로 생성하는 데이터베이스 오브젝트 이다.  
+Oracle, PostgreSQL, DB2, H2 데이터베이스에서 사용을 한다.  
+
+추가로 알아둘 옵션은 **initialValue**과 **allocationSize**이다. 시퀀스의 시작과 한번의 호출로 가지고 오는 시퀀스의 범위이다.  
+이 설정은 동시성 문제를 해소해주는데 도움이 된다.  
+
+이유는 다음과 같다.  
+
+initialValue는 "1" allocationSize는 "10"으로 설정을 했다고 가정을 하면 영속성 컨텍스트에 저장할때 시퀀스의 번호를 불러올때 1~10 10개의 시퀀스 번호를 미리 발급받아 사용을 한다.  
+
+```java
+@Entity
+@SequenceGenerator(
+        name = "MEMBER_SEQ_GENERATOR",
+        sequenceName = "MEMBER_SEQ",
+        initialValue = 1, allocationSize = 1
+)
+public class Member {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,
+            generator = "MEMBER_SEQ_GENERATOR"
+    )
+    private Long id;
+
+    @Column(nullable = false, length = 10)
+    private String name;
+}
+
+Member member = new Member();
+member.setName("KWON");
+System.out.println("===========영속성 컨텍스트 수행 시작==========");
+em.persist(member);
+System.out.println("===========영속성 컨텍스트 수행 종료==========");
+
+tx.commit();
+
+/**
+Hibernate: create sequence MEMBER_SEQ start with 1 increment by 1 // 자동으로 시퀀스 생성하는 쿼리. 애플리케이션 실행시점
+
+===========영속성 컨텍스트 수행 시작==========
+Hibernate: 
+ call next value for MEMBER_SEQ
+===========영속성 컨텍스트 수행 종료==========
+
+Hibernate: 
+    /* insert hellojpa.Member
+            */ insert 
+        into
+                    Member
+                                (name, id) 
+          values
+                      (?, ?)
+*/
+```
+
+
+추가로 알아둘 옵션은 initialValue과 allocationSize이다. 시퀀스의 시작과 한번의 호출로 가지고 오는 시퀀스의 범위이다.
+해당 설정은 동시성 문제를 해소해주는데 도움이 된다. 이유는 다음과 같다.  
+
+initialValue는 "1" allocationSize는 "10"으로 설정을 했다고 가정을 하면 영속성 컨텍스트에 저장할때 시퀀스의 번호를 불러올때 1~10 10개의 시퀀스 번호를 미리 발급받아 사용을 한다.
+
+```java
+Member member1 = new Member();
+member1.setName("KWON");
+
+Member member2 = new Member();
+member2.setName("BYEONG");
+
+Member member3 = new Member();
+member3.setName("YUN");
+
+System.out.println("===========영속성 컨텍스트 수행 시작==========");
+em.persist(member1); // seq = 1 | memory = 10
+em.persist(member2); // seq = 2 | memory = 10
+em.persist(member3); // seq = 3 | memory = 10
+System.out.println("===========영속성 컨텍스트 수행 종료==========");
+
+tx.commit();
+```
+
+위의 로직이 수행되면 시퀀스의 상태는 아래 이미지처럼 된다.  
+![시퀀스](https://github.com/sksggg123/TIL/blob/master/images/H2_Sequence.gif)
+
+TABLE은 키 생성 전용 테이블을 하나 만들어서 데이터베이스 시퀀스를 흉내내는 전략이다. 장점으로는 모든 데이터베이스에서 사용 가능한 점이다.
+
+
+## 권장하는 기본키 전략
+- 기본 키 제약 조건 not null
+- 대리키(대체키)를 사용하자(주민번호와 같은 키는 사용하지말자.)
+- Long형으로 설정을 하자, Integer로 설정 시 10억 이상으로 넘어가게 될 경우 다시 초기화가 되기 때문이다.
