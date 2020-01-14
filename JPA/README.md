@@ -2,14 +2,16 @@
 
 ## 자바 ORM 표준 JPA 프로그래밍 - 기본편 (인프런)
 
-### [JPA 소개](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_introduce.md)
+### [1. JPA 소개](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_introduce.md)
 
-### [JPA 환경설정](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_preferences.md)
+### [2. JPA 환경설정](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_preferences.md)
 
-### [JPA 기본 CRUD](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_ex1_training.md)
+### [3. JPA 기본 CRUD](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_ex1_training.md)
 
-### [JPA 영속성 컨텍스트](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_persistence.md)
+### [4. JPA 영속성 컨텍스트](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_persistence.md)
 
-### [JPA 엔티티 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_entity_mapping.md)
+### [5. JPA 엔티티 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_entity_mapping.md)
 
-### [JPA 연관관계 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_relation_mapping.md)
+### [6. JPA 연관관계 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_relation_mapping.md)
+
+### [7. JPA 연관관계 매핑시 알아두어야 할 점](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_check_relation_mapping.md)
