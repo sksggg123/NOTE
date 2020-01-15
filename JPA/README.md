@@ -15,3 +15,5 @@
 ### [6. JPA 연관관계 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_relation_mapping.md)
 
 ### [7. JPA 연관관계 매핑시 알아두어야 할 점](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_check_relation_mapping.md)
+
+### [8. JPA 실전예제 만들어서 풀어보기](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_practice.md)
