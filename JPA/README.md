@@ -21,3 +21,5 @@
 ### [9. JPA 다양한 연관관계 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_variety_relation_mapping.md)
 
 ### [10. JPA 상속관계 매핑](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_inheritance_mapping.md)
+
+### [11. JPA 프록시, 지연로딩, 즉시로딩](https://github.com/sksggg123/TIL/blob/master/JPA/jpa_proxy.md)
