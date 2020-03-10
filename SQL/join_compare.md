@@ -6,7 +6,7 @@
 
 |Table1|Table2|Table3|
 |-|-|-|
-|![table1](https://github.com/sksggg123/TIL/blob/master/images/SQL_TABLE_3.PNG)|![table2](https://github.com/sksggg123/TIL/blob/master/images/SQL_TABLE_3.PNGSQL_TABLE_2.PNG)|![table3](https://github.com/sksggg123/TIL/blob/master/images/SQL_TABLE_3.PNGSQL_TABLE_3.PNG)|
+|![table1](https://github.com/sksggg123/TIL/blob/master/images/SQL_TABLE_1.PNG)|![table2](https://github.com/sksggg123/TIL/blob/master/images/SQL_TABLE_2.PNG)|![table3](https://github.com/sksggg123/TIL/blob/master/images/SQL_TABLE_3.PNG)|
 
 ### Test Table 생성 script
 ```sql
