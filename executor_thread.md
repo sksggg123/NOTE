@@ -2,7 +2,7 @@
 
 ExecutorService 와 일반 Thread의 차이점은 Executor의 경우 Thread Pool을 활용하여 사용이 되며, Thread는 각기 다른 별도의 Pool이 사용되지 않고 수행이 된다. 아래는 위의 로직 수행 후 결과 값이다.
 
-참고로 **newFixedThreadPool**이 아닌 **newCachedThreadPool()**을 사용할 경우 동적으로 Pool을 생성해준다.
+참고로 **newFixedThreadPool**이 아닌 **newCachedThreadPool()** 을 사용할 경우 동적으로 Pool을 생성해준다.
 
 ```java
 public class MainRest {
