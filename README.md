@@ -7,6 +7,7 @@
 ## J
 
 ### [JPA](https://github.com/sksggg123/TIL/blob/master/JPA/README.md)
+### [Executor와 Thread비교](https://github.com/sksggg123/TIL/blob/master/JPA/README.md)
 
 ## S
 
